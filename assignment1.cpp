@@ -27,34 +27,98 @@ public:
 
 	void pushFront(int key);
 	void popFront();
+	int* topFront();
+	void pushBack(int key);
+	void popBack();
+
+	int* topBack();
 	void printList();
 
 	//~SinglyLinkedList();
 	
 };
 
+//push from operation
 void SinglyLinkedList::pushFront(int key){
 	Node* newNode=new Node();
 
 	newNode->key=key;
-	newNode->next=head;
-	head=newNode;
+	if(head==NULL && tail==NULL){
+		head=newNode;
+		tail=head;
+	}
+	else{
+			newNode->next=head;
+			head=newNode;
+
+	}
+
+
 
 	cout<<"operation completed"<<endl;
 
 
 }
 
+//pop front operation
 void SinglyLinkedList::popFront(){
+	if(head==NULL){
+		cout<<"Invalid operation"<<endl;
+		
+
+	}
+
 	Node* temp=head;
 	head=head->next;
 	delete temp;
 
 	cout<<"operation completed"<<endl;
 }
+//top front operation
+int* SinglyLinkedList::topFront(){
+	return &(head->key);
+}
 
+//push back operation
+
+void SinglyLinkedList::pushBack(int value){
+	Node* newNode=new Node();
+
+	newNode->key=value;
+	if(head==NULL && tail==NULL){
+		head=newNode;
+	}
+	tail->next=newNode;
+	tail=newNode;
+
+	cout<<"operation completed"<<endl;
+
+}
+
+//pop back operation
+void SinglyLinkedList::popBack(){
+	Node* cur=head;
+	while(cur->next->next!=NULL){
+		cur=cur->next;
+	}
+	Node* temp=cur->next;
+	cur->next=NULL;
+	tail=cur;
+	delete temp;
+	cout<<"operation completed"<<endl;
+}
+
+//top back operation
+
+int* SinglyLinkedList::topBack(){
+
+	return &(tail->key);
+
+}
+
+
+//printing entire linked list
 void SinglyLinkedList::printList(){
-
 
 	
 	Node* curr=head;
@@ -73,7 +137,6 @@ void printDots(){
 	cout<<"-------------------------"<<endl;
 
 }
-
 
 
 int main(){
@@ -96,7 +159,6 @@ Menu:
 			int value;
 			cout<<"Enter key: ";
 			cin>>value;
-			//main();
 			s->pushFront(value);
 
 			goto Menu;
@@ -108,15 +170,28 @@ Menu:
 
 		}
 		if(choice==3){
+			cout<<*(s->topFront())<<endl;
+			goto Menu;
 
 		}
 		if(choice==4){
+			int value;
+			cout<<"Enter key: ";
+			cin>>value;
+			s->pushBack(value);
+
+			goto Menu;
 
 		}
 		if(choice==5){
+			s->popBack();
+			goto Menu;
+
 
 		}
 		if(choice==6){
+			cout<<*(s->topBack())<<endl;
+			goto Menu;
 
 		}
 		if(choice==7){
@@ -141,6 +216,10 @@ Menu:
 		if(choice==13){
 			exit(1);
 
+		}
+		else{
+			cout<<"Invalid option..Try again"<<endl;
+			goto Menu;
 		}
 		
 
