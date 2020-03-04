@@ -33,6 +33,15 @@ public:
 
 	int* topBack();
 	void printList();
+	bool findKey(int val);
+
+	bool isEmpty();
+
+	void erase(int val);
+
+	void addBefore(int node_value,int val);
+	void addAfter(int node_value,int val);
+
 
 	//~SinglyLinkedList();
 	
@@ -116,6 +125,137 @@ int* SinglyLinkedList::topBack(){
 
 }
 
+//finding a value
+
+bool SinglyLinkedList::findKey(int val){
+	Node* cur=head;
+	while(cur != NULL){
+		if(cur->key==val){
+			return true;
+		}
+		cur=cur->next;
+
+	}
+	return false;
+}
+
+//erase a key from the list
+
+void SinglyLinkedList::erase(int val){
+	if(head==NULL){
+		cout<<"Invalid......list is empty"<<endl;
+		return;
+	}
+	Node* cur=head;
+
+	Node* temp=NULL;
+
+	if(cur->key=val){
+		temp=cur;
+		head=temp->next;
+		delete temp;
+		cout<<"Item has deleted"<<endl;
+		return;
+	}
+
+
+
+	while(cur!=NULL){
+		if(cur->key==val){
+			temp=cur;
+			cur=temp->next;
+			delete temp;
+			cout<<"Item has deleted"<<endl;
+			return;
+		}
+
+	}
+	cout<<"Item can not be delete"<<endl;
+	return;
+}
+
+//check empty linked list
+
+bool SinglyLinkedList::isEmpty(){
+	if(head==NULL){
+		return true;
+	}
+	return false;
+}
+//add before a linked list node
+
+void SinglyLinkedList::addBefore(int node_value,int val){
+	if(head==NULL){
+		cout<<"Invalid.....List is empty";
+	}
+
+	Node* node=NULL;
+	Node* cur=head;
+	while(cur !=NULL){
+		if(cur->key==node_value){
+			node=cur;
+			break;
+		}
+		cur=cur->next;
+	}
+	if(node==NULL){
+		cout<<"Node does not exits"<<endl;
+		return;
+	}
+
+	Node* newNode=new Node();
+	newNode->key=val;
+	if(node==head){
+		newNode->next=node;
+		head=newNode;
+	}
+
+	while(cur!=node){
+		cur=cur->next;
+	}
+	Node* prevNode=cur;
+	newNode->next=node;
+	prevNode->next=newNode;
+	cout<<"added successfully"<<endl;
+	return;
+
+	
+
+}
+
+//add after a linked list node
+
+void SinglyLinkedList::addAfter(int node_value,int val){
+	if(head==NULL){
+		cout<<"Invalid.....List is empty";
+	}
+
+	Node* node=NULL;
+	Node* cur=head;
+	while(cur !=NULL){
+		if(cur->key==node_value){
+			node=cur;
+			break;
+		}
+		cur=cur->next;
+	}
+	if(node==NULL){
+		cout<<"Node does not exits"<<endl;
+		return;
+	}
+	Node* newNode=new Node();
+	newNode->key=val;
+	newNode->next=node->next;
+	node->next=newNode;
+
+	if(tail==node){
+		tail=newNode;
+	}
+	cout<<"added successfully"<<endl;
+	return;
+
+}
+
 
 //printing entire linked list
 void SinglyLinkedList::printList(){
@@ -132,7 +272,7 @@ void SinglyLinkedList::printList(){
 }
 
 
-void printDots(){
+void printDash(){
 
 	cout<<"-------------------------"<<endl;
 
@@ -145,12 +285,12 @@ int main(){
 
 	
 Menu:
-	printDots();
+	printDash();
 	cout<<"Singly Linked List"<<endl;
-	printDots();
+	printDash();
 	cout<<"(1) push front...  (2) pop front... (3) top front...\n(4) push back... (5) pop back...(6) top back..."<<endl;
 	cout<<"(7) find key...  (8) erase key... (9) empty...\n(10) add before... (11) add after..(12) print...\n(13)exit..."<<endl;
-	printDots();
+	printDash();
 	int choice;
 	cout<<"Enter choice: ";
 	cin>>choice;
@@ -195,18 +335,67 @@ Menu:
 
 		}
 		if(choice==7){
+			int key_value;
+			cout<<"Enter search key:";
+			cin>>key_value;
+			if(s->findKey(key_value)){
+				cout<<"Item exists in the list"<<endl;
+			}
+			else{
+				cout<<"Item does not exits in the list"<<endl;
+
+			}
+			goto Menu;
 
 		}
 		if(choice==8){
+			int item;
+			cout<<"Enter item for delete:";
+			cin>>item;
+			s->erase(item);
+
+
+			goto Menu;
+
+
+
+
 
 		}
 		if(choice==9){
+						if(s->isEmpty()){
+				cout<<"Empty linked list"<<endl;
+			}
+			else{
+				cout<<"Linked is not empty"<<endl;
+			}
+			goto Menu;
 
 		}
 		if(choice==10){
+			int a,b;
+			cout<<"Enter node value:";
+			cin>>a;
+			cout<<"\nEnter new node value:";
+			cin>>b;
+			
+			s->addBefore(a,b);
+
+			goto Menu;
+
 
 		}
 		if(choice==11){
+			int a,b;
+			cout<<"Enter node value:";
+			cin>>a;
+			cout<<"\nEnter new node value:";
+			cin>>b;
+			
+			s->addAfter(a,b);
+
+			goto Menu;
+
 
 		}
 		if(choice==12){
