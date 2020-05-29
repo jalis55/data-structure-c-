@@ -1,3 +1,12 @@
+/*
+Name:Jalis Mahamud Tarif
+Id:1521001042
+Sec:06
+
+
+*/
+
+
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -107,11 +116,9 @@ void Graph::searchVertex(int arr[3]){
         }
 }
 
-
-
 int main(){
-    int graph_size=5;
-    Graph gh(graph_size);
+    int no_of_node=5;
+    Graph gh(no_of_node);
     //adding edge
     gh.addEdge(0,1);
     gh.addEdge(0,4);
@@ -132,7 +139,7 @@ int main(){
     else{
 
         cout<<"Nonadjacent vertices of "<<ver<<" is:";
-        for(int i=0;i<graph_size;i++){
+        for(int i=0;i<no_of_node;i++){
             if(ptr[i]== -1){
                 break;
 
@@ -143,14 +150,12 @@ int main(){
 
     }
 
-
-
-    int arr_vertices[3]={0,4,3};
+    ///int arr_vertices[3]={0,4,3};
+    int arr_vertices[3]={0,1,2};
     gh.searchVertex(arr_vertices);
-    //adding unknown vertices
 
-    //gh.addUnknownVertices(4);
-    cout<<"\n--------------------------------";
+    //adding unknown vertices
+    cout<<"\n------------------------------------";
     int add_unknown_vertices_to=4;
     cout<<"\nAfter adding unknown vertices to "<<add_unknown_vertices_to<<endl;
     gh.addUnknownVertices(add_unknown_vertices_to);

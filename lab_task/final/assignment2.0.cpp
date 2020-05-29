@@ -1,3 +1,11 @@
+/*
+Name:Jalis Mahamud Tarif
+Id:1521001042
+Sec:06
+
+
+*/
+
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -84,11 +92,7 @@ void Graph::showCommonVertices(int x,int y){
 bool Graph::checkConnection(int src, int dest,int pred[], int dist[]){
 
 	list<int> queue;
-
-
 	bool visited[V];
-
-
 	for (int i = 0; i < V; i++) {
 		visited[i] = false;
 		dist[i] = INT_MAX;
@@ -156,12 +160,9 @@ void Graph::shortestPath(int s,int dest){
 
 
 
-
-
-
 int main(){
-    int graph_size=7;
-    Graph gh(graph_size);
+    int no_of_node=7;
+    Graph gh(no_of_node);
     gh.addEdge(0,1);
     gh.addEdge(0,2);
     gh.addEdge(1,4);
@@ -178,7 +179,7 @@ int main(){
     ptr = gh.adjacentVertices(ver);
 
         cout<<"Adjacent vertices of "<<ver<<":";
-        for(int i=0;i<graph_size;i++){
+        for(int i=0;i<no_of_node;i++){
             if(ptr[i]== -1){
                 break;
 
@@ -188,6 +189,6 @@ int main(){
          cout<<endl;
 
     gh.showCommonVertices(1,2);
-    gh.shortestPath(0, 6);
+    gh.shortestPath(0, 5);
 
 }
